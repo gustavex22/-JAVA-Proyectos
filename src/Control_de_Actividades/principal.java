@@ -9,7 +9,7 @@ public class principal {
      * funciones:
      * Menu [Listo]
      * Añadir Actividades [Terminado] [En pruebas]
-     * Ver Actividades
+     * Ver Actividades [Terminado]
      * Eliminar actividades
      * Marcas como Completado las actividades
      */
@@ -30,6 +30,7 @@ public class principal {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        boolean control = true;
         int counter = 0;
         int Option=0;
 
@@ -44,14 +45,18 @@ public class principal {
             
         }
 
+        while (control) {
+            
         System.out.println("""
 
                 __Control de Actividades__
+                
 
                 1.Ver Actividades
                 2.Añadir Actividades
                 3.Marcar como completado una ACT.
                 4.Eliminar Actividad
+                5.Salir
                 """);
 
 //? Entrada de datos:Simple codigo para guardar la opcion elegida en una Variable
@@ -63,9 +68,19 @@ public class principal {
         
 
         switch (Option) {
-            case 1:
+            case 1://* Ver actividades
+                String [] Datos = new String[4];
 
-                
+                for (int index = 0; index < counter ; index++) {
+                    for (int f = 0; f < Actividades_Datos.get(index).size() ; f++) {
+                        
+                        Datos[f] = Actividades_Datos.get(index).get(f);
+                        
+                    }
+                    System.out.println(""+Datos[0]+" "+Datos[1]+"."+Datos[2]+":\n"+Datos[3]+"\n");
+
+                }
+
                 break;
         
             case 2://* Añadir Actividad
@@ -79,7 +94,7 @@ public class principal {
 
                 System.out.println("Introduzca el nombre de la tarea");
                 nombre = sc.next();
-                sc.next();
+                sc.nextLine();
 
                 System.out.println("Introduzca la descripcion:");
                 descripcion = sc.nextLine();
@@ -91,14 +106,21 @@ public class principal {
                 //* llamada a la funcion añadir_datos
 
                 Añadir_Actividad(nombre,descripcion,status,orden,Actividades_Datos);
+                counter++;
                 break;
+
+
+            case 5://* Salir
+                control = false;
+                break;
+            
             default:
                 break;
         }
 
 
 
-
-
+        }
+        
     }
 }

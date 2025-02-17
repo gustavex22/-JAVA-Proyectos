@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class principal {
     /*
-     * Programa de control de Actividades
+     *      Programa de control de Actividades
      * funciones:
      * Menu [Listo]
      * Añadir Actividades [Terminado] [En pruebas]

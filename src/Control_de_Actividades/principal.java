@@ -109,6 +109,21 @@ public class principal {
                 counter++;
                 break;
 
+            case 3://* Eliminacion de actividad
+                System.out.println("Introduzca el Numero de Actividad:");
+                Option = sc.nextInt();
+
+                Actividades_Datos.get(Option).clear();
+
+                //* Llamar funcion para reordenar datos
+
+
+
+
+                
+                Option = 0;
+                break;
+
 
             case 5://* Salir
                 control = false;

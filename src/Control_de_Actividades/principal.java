@@ -27,6 +27,28 @@ public class principal {
     }
 
 
+    public static void Reordenar_Datos(ArrayList <ArrayList<String>> arreglo, int index_2){
+        String Orden,Status,Nombre,Descripcion;
+
+        ArrayList <ArrayList<String>> Temporal = new ArrayList<>();
+
+        for (int index = index_2; index < arreglo.size() ; index++) {
+                //? esta linea crea un clon temporal ,moviendo los datos de una fila adelante del arreglo a otro temporal
+            for (int i = 0; i <= 3; i++) {
+                Temporal.get(0).add(arreglo.get(index+1).get(i));
+            }
+            //? limpia el arreglo original
+            arreglo.get(index+1).clear();
+            
+            //? este mueve los datos del arreglo temporal al original ,a la fila originalmente eliminada en el codigo principal no en la funcion
+            for (int x = 0; x <= 3; x++) {
+                arreglo.get(index).add(Temporal.get(0).get(x));
+                
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -40,7 +62,7 @@ public class principal {
         ArrayList <ArrayList<String>> Actividades_Datos = new ArrayList<>();
 
         //* Inicializar filas del arreglo
-        for (int x = 0; x < 3; x++) {
+        for (int x = 0; x < 4; x++) {
             Actividades_Datos.add(new ArrayList<>());
             
         }
@@ -108,23 +130,28 @@ public class principal {
                 Añadir_Actividad(nombre,descripcion,status,orden,Actividades_Datos);
                 counter++;
                 break;
+            case 3: //* Marcar como completado
+                System.out.print("Que actividad desea Marcar?:");
+                Option = sc.nextInt();
 
-            case 3://* Eliminacion de actividad
+                Actividades_Datos.get(Option).set(0,"[Completado]");
+                Option= 0;
+                break;
+            case 4://* Eliminacion de actividad
+                int tamaño_arreglo = Actividades_Datos.size();
+
                 System.out.println("Introduzca el Numero de Actividad:");
                 Option = sc.nextInt();
 
                 Actividades_Datos.get(Option).clear();
 
                 //* Llamar funcion para reordenar datos
-
-
-
-
-                
+                if( Option == tamaño_arreglo ){
+                    Reordenar_Datos(Actividades_Datos,Option);
+                }
                 Option = 0;
+                counter--;
                 break;
-
-
             case 5://* Salir
                 control = false;
                 break;

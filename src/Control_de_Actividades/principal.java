@@ -7,11 +7,13 @@ public class principal {
     /*
      *      Programa de control de Actividades
      * funciones:
+     * ----------------
      * Menu [Listo]
-     * Añadir Actividades [Terminado] [En pruebas]
+     * Añadir Actividades [Terminado]
      * Ver Actividades [Terminado]
-     * Eliminar actividades
-     * Marcas como Completado las actividades
+     * Eliminar actividades [Completado]
+     * Marcas como Completado las actividades [ Completado]
+     * ----------------
      */
 
     /* contruccion
@@ -21,33 +23,18 @@ public class principal {
 
     public static void Añadir_Actividad(String Nombre , String Descripcion , String Status, int Orden, ArrayList <ArrayList<String>> arreglo){
         arreglo.get(Orden).add(Status);
-        arreglo.get(Orden).add(Orden+"");
+        arreglo.get(Orden).add(String.valueOf(Orden));
         arreglo.get(Orden).add(Nombre);
         arreglo.get(Orden).add(Descripcion);
     }
 
 
-    public static void Reordenar_Datos(ArrayList <ArrayList<String>> arreglo, int index_2){
-        String Orden,Status,Nombre,Descripcion;
-
-        ArrayList <ArrayList<String>> Temporal = new ArrayList<>();
-
-        for (int index = index_2; index < arreglo.size() ; index++) {
-                //? esta linea crea un clon temporal ,moviendo los datos de una fila adelante del arreglo a otro temporal
-            for (int i = 0; i <= 3; i++) {
-                Temporal.get(0).add(arreglo.get(index+1).get(i));
-            }
-            //? limpia el arreglo original
-            arreglo.get(index+1).clear();
-            
-            //? este mueve los datos del arreglo temporal al original ,a la fila originalmente eliminada en el codigo principal no en la funcion
-            for (int x = 0; x <= 3; x++) {
-                arreglo.get(index).add(Temporal.get(0).get(x));
-                
-            }
+    public static void Reordenar_Datos(ArrayList <ArrayList<String>> arreglo, int index){
+        //?Reordena los datos hacia arriba ,empezando desde la Fila eliminada
+        for (int i = index; i < arreglo.size()-1; i++) {
+            arreglo.set(i,arreglo.get(i+1));
         }
-    }
-
+}
 
 
     public static void main(String[] args) {
@@ -55,6 +42,8 @@ public class principal {
         boolean control = true;
         int counter = 0;
         int Option=0;
+
+
 
         //* base de datos donde se guardaran las tareas
         //? uso un arraylist dentro de otro para simular una matriz de un array normal bruh , aprovechando la flexibilidad del arraylist
@@ -90,9 +79,12 @@ public class principal {
         
 
         switch (Option) {
+
             case 1://* Ver actividades
+                //*? arreglo para separar lso datos
                 String [] Datos = new String[4];
 
+                //?bulce para imprimir los datos
                 for (int index = 0; index < counter ; index++) {
                     for (int f = 0; f < Actividades_Datos.get(index).size() ; f++) {
                         
@@ -130,6 +122,7 @@ public class principal {
                 Añadir_Actividad(nombre,descripcion,status,orden,Actividades_Datos);
                 counter++;
                 break;
+
             case 3: //* Marcar como completado
                 System.out.print("Que actividad desea Marcar?:");
                 Option = sc.nextInt();
@@ -137,32 +130,29 @@ public class principal {
                 Actividades_Datos.get(Option).set(0,"[Completado]");
                 Option= 0;
                 break;
+
             case 4://* Eliminacion de actividad
-                int tamaño_arreglo = Actividades_Datos.size();
 
                 System.out.println("Introduzca el Numero de Actividad:");
                 Option = sc.nextInt();
 
+                //* Elimina la fila seleccionada
                 Actividades_Datos.get(Option).clear();
 
                 //* Llamar funcion para reordenar datos
-                if( Option == tamaño_arreglo ){
                     Reordenar_Datos(Actividades_Datos,Option);
-                }
+                
                 Option = 0;
                 counter--;
                 break;
+
             case 5://* Salir
                 control = false;
                 break;
             
             default:
                 break;
+            }
         }
-
-
-
-        }
-        
     }
 }

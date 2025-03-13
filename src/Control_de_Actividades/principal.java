@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class principal {
     /*
-     *      Programa de control de Actividades
+     *      Programa de control de Actividades[Terminado]
      * funciones:
      * ----------------
      * Menu [Listo]
@@ -154,5 +154,6 @@ public class principal {
                 break;
             }
         }
+        sc.close();
     }
 }

@@ -81,7 +81,9 @@ public class principal {
         switch (Option) {
 
             case 1://* Ver actividades
+            
                 //*? arreglo para separar lso datos
+
                 String [] Datos = new String[4];
 
                 //?bulce para imprimir los datos

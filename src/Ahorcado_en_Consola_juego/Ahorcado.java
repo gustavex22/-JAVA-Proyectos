@@ -18,13 +18,34 @@ public class Ahorcado {
          * procedera a comparar la letra que introduzcamos con la variable
          * dibujara en consola como el ahorcado va actualizando su estado segun no acertemos en la palabra
          */
-    public static void main(String[] args) {
+
+
+        private static boolean Comparacion_Letra(char Letra_user, String Palabra){
+            boolean Comparacion = false;
+            int Letras_Palabra = Palabra.length();
+
+            //? Compara cada letra de la palabra elegida con la letra introducida del usuario
+            for (int index = 0; index < Letras_Palabra; index++) {
+                if(Letra_user == Palabra.charAt(index)){
+                    Comparacion = true;
+                    break;
+                }
+            }
+            return Comparacion;
+        }
+
+
+        public static void main(String[] args) {
+        //* Definicion variables
         Scanner sc = new Scanner(System.in);
-        String Palabra,Genero;
+        String Palabra="hola",Genero="",Ahorcado ="";
+        char Letra_User;
         int Opcion_User=0;
+        int Estatus=0;
+
 
         //? Controla el bucle while de cada seccion del juego
-        boolean Menu = true,Dibujado=true;
+        boolean Menu = true,Dibujado=false;
 
         //*Menu
         while (Menu) {
@@ -41,7 +62,8 @@ public class Ahorcado {
 
                 case 1:
                 System.out.println("Iniciando Juego...");
-                Menu = true;
+                Dibujado = true;
+                Menu = false;
                 break;
 
                 case 2:
@@ -51,9 +73,6 @@ public class Ahorcado {
             }
 
             while(Dibujado){
-                int Estatus=11;
-                String Ahorcado = "";
-
                 switch (Estatus) {
                     case 0 :
                         Ahorcado = """
@@ -62,11 +81,8 @@ public class Ahorcado {
                                 ||
                                 ||
                                 ||
-                                
                                 ||
-                                
                                 ||
-                                
                                 ||
                                 """;
                         break;
@@ -79,9 +95,7 @@ public class Ahorcado {
                                 ||
                                 ||
                                 ||
-                                
                                 ||
-                                
                                 ||
                                 """;
                         break;
@@ -94,9 +108,7 @@ public class Ahorcado {
                                 ||           O
                                 ||
                                 ||
-                                
                                 ||
-                                
                                 ||
                                 """;
                         break;
@@ -108,9 +120,7 @@ public class Ahorcado {
                                 ||           O
                                 ||           |
                                 ||
-                                
                                 ||
-                                
                                 ||
                                 """;
                         break;
@@ -124,7 +134,6 @@ public class Ahorcado {
                                 ||           |
                                 ||          /|\\
                                 ||
-                                
                                 ||
                                 """;
                         break;
@@ -139,7 +148,6 @@ public class Ahorcado {
                                 ||          /|\\
                                 ||         / | \\
                                 ||
-                                
                                 ||
                                 """;
                         break;
@@ -187,18 +195,29 @@ public class Ahorcado {
                         
                         break;
                 
-                    default:
+                    case 9:
+
+                    //?Termina el juego
+                        System.out.println("Has Perdido");
+                        Dibujado = false;
                         break;
                 }
                 
                 System.out.println(Ahorcado+"\n");
-                Dibujado = false;
+                System.out.println("Introduce una Letra:");
+                Letra_User= sc.next().toLowerCase().charAt(0);
+                boolean Estado =Comparacion_Letra(Letra_User, Palabra);
 
-
+                if(Estado){
+                    System.out.println("Letra Correcta");
+                    Estatus--;
+                }else{
+                    System.out.println("Letra Incorrecta");
+                    Estatus++;
+                }
             }
-
-            
         }
+        sc.close();
     }
 
 }
